@@ -23,18 +23,22 @@ function Particle() {
   function edges() {
     if (pos.x > width) {
       pos.x = 0;
+      pos.y = random(height);
       updatePrev();
     }
     if (pos.x < 0) {
       pos.x = width;
+      pos.y = random(height);
       updatePrev();
     }
     if (pos.y > height) {
       pos.y = 0;
+      pos.x = random(width);
       updatePrev();
     }
     if (pos.y < 0) {
       pos.y = height;
+      pos.x = random(width);
       updatePrev();
     }
   }
@@ -49,8 +53,6 @@ function Particle() {
       edges();
     },
     show() {
-      stroke(0, 5);
-      strokeWeight(1);
       line(pos.x, pos.y, prevPos.x, prevPos.y);
       updatePrev();
     },

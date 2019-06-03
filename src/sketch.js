@@ -1,4 +1,4 @@
-const inc = 0.1;
+const inc = 0.05;
 const scale = 10;
 let cols, rows;
 
@@ -7,8 +7,10 @@ let zoff = 0;
 let fr;
 
 const particles = [];
-
+const maxParticles = 3000;
 let flowField;
+
+const color = [0, 0, 0];
 
 function setup() {
   createCanvas(800, 600);
@@ -18,7 +20,7 @@ function setup() {
 
   flowField = Array(cols * rows);
 
-  for (let i = 0; i < 2500; i++) {
+  for (let i = 0; i < maxParticles; i++) {
     particles[i] = Particle();
   }
   background(255);
@@ -26,6 +28,7 @@ function setup() {
 
 
 function draw() {
+  stroke(0, 5);
   let yoff = 0;
   for (let y = 0; y < rows; y++) {
     let xoff = 0;
@@ -34,11 +37,10 @@ function draw() {
       const angle = noise(xoff, yoff, zoff) * TWO_PI * 4;
       flowField[index] = p5.Vector.fromAngle(angle).setMag(1);
       xoff += inc;
-      stroke(0, 50);
     }
     yoff += inc;
 
-    zoff += 0.0003;
+    zoff += 0.00003;
   }
 
   for (let i = 0; i < particles.length; i++) {
